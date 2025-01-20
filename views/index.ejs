@@ -1,11 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Hello Bhai
-</body>
-</html>
+<%- include('./partials/header') %>
+
+<div class="w-full h-screen flex px-20 bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200">
+    <!-- Registration Section -->
+    <div class="w-1/2 flex items-center justify-center h-screen">
+        <div class="w-full px-32">
+            <h3 class="text-4xl font-bold text-indigo-700">Welcome to <span class="text-purple-600 font-extrabold">E Libs</span></h3>
+            <h4 class="text-2xl mb-5 text-gray-700">Create your account</h4>
+            <form autocomplete="off" action="/users/register" method="post">
+                <input
+                    class="bg-gray-100 block w-full px-4 py-3 border-[1px] rounded-md mb-4 border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    type="text" placeholder="Full Name" name="name" required>
+                <input
+                    class="bg-gray-100 block w-full px-4 py-3 border-[1px] rounded-md mb-4 border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    type="email" placeholder="Email" name="email" required>
+                <input
+                    class="bg-gray-100 block w-full px-4 py-3 border-[1px] rounded-md mb-4 border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    type="password" placeholder="Password" name="password" required>
+                <input
+                    class="px-5 py-3 w-full rounded-full mt-2 bg-purple-600 text-white font-medium hover:bg-purple-700 focus:outline-none transition"
+                    type="submit" value="Create My Account">
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Section -->
+    <div class="w-1/2 flex items-center justify-center h-screen bg-white shadow-xl rounded-lg">
+        <div class="w-full px-32">
+            <h4 class="text-2xl capitalize mb-5 text-gray-700 font-semibold">Login to your account</h4>
+            <form autocomplete="off" action="/users/login" method="post">
+                <input
+                    class="block bg-gray-100 w-full px-4 py-3 border-[1px] rounded-md mb-4 border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    type="email" placeholder="Email" name="email" required>
+                <input
+                    class="block bg-gray-100 w-full px-4 py-3 border-[1px] rounded-md mb-4 border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    type="password" placeholder="Password" name="password" required>
+                <input
+                    class="px-5 py-3 w-full rounded-full mt-2 bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none transition"
+                    type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %>
