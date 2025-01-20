@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/ownerlogin',(req,res)=>{
-    res.render('owner-login');
+router.get('/adminlogin',(req,res)=>{
+    res.render('admin-login');
 })
 
 module.exports = router;

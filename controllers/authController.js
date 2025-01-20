@@ -26,10 +26,37 @@ let createAdmin = async (req,res)=>{
                     });
                     let token = generateToken(createdAdmin);
                     res.cookie("token", token);
-                    res.send("owner created succesfully");
+                    res.send("admin created succesfully");
                 }
             })
         })
+    }
+    catch (err) {
+        res.send(err.message);
+    }
+}
+
+let adminlogin = async (req,res)=>{
+    try {
+        let { email, password } = req.body;
+        let admin = await userModel.findOne({role:"admin"});
+        if (email!==admin.email) {
+            req.send("Email or passowrd Incorrect");
+            return res.redirect("/adminlogin");
+        }
+        bcrypt.compare(password, admin.password, (err, result) => {
+            if (!result) {
+                res.send("email or password Incorrect");
+                // return res.redirect("/adminlogin");
+            }
+            else {
+                let token = generateToken(admin);;
+                res.cookie("token", token);
+                res.send("admin login successfull");
+            }
+        });
+
+
     }
     catch (err) {
         res.send(err.message);
@@ -66,15 +93,14 @@ let registerUser = async (req, res) => {
 let loginUser = async (req, res) => {
     try {
         let { email, password } = req.body;
-        let user = await userModel.findOne({ email });
+        let user = await userModel.findOne({ email,role:"user" });
         if (!user) {
-            req.flash("error", "Email or passowrd Incorrect");
-            return res.redirect("/");
+            res.send("Email or passowrd Incorrect");
+            // return res.redirect("/");
         }
         bcrypt.compare(password, user.password, (err, result) => {
             if (!result) {
-                req.flash("error", "email or password Incorrect");
-                return res.redirect("/");
+                return res.send( "email or password Incorrect");
             }
             else {
                 let token = generateToken(user);
@@ -89,4 +115,8 @@ let loginUser = async (req, res) => {
         res.send(err.message);
     }
 }
-module.exports = {registerUser,loginUser,createAdmin};
+let logout = async (req,res)=>{
+    res.clearCookie("token");
+    res.send("logout successfull");
+}
+module.exports = {registerUser,loginUser,createAdmin,adminlogin,logout};
